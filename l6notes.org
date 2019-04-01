@@ -1,0 +1,13 @@
+* Lecture 6
+** Compressive vs expansive function
+- Functions all monotonically increasing
+- If input is increasing *faster* than output, function is compressive
+- Otherwise,
+- eg exponential - compressive 0 < alpha < 1 and expansive > 1
+** Sigmoid functions
+- Map R onto [0, 1]
+- -inf = 0, +inf = 1
+- e.g. the *logistic function*
+- Logistic function is expansive < 0, compressive > 0
+- $f(x) = \frac{1}{1 + e^{-x}}$
+- Gradient is a bell curve 

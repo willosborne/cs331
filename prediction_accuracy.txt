@@ -1,0 +1,9 @@
+2 hidden neurons, 16 training vectors: 0.22839158445378227
+4 hidden neurons, 16 training vectors: 0.25516858866251557
+8 hidden neurons, 16 training vectors: 0.2392214974231473
+2 hidden neurons, 32 training vectors: 0.2105198468873898
+4 hidden neurons, 32 training vectors: 0.22867860042535926
+8 hidden neurons, 32 training vectors: 0.20861607164937318
+2 hidden neurons, 64 training vectors: 0.21085558196553683
+4 hidden neurons, 64 training vectors: 0.19749008055599754
+8 hidden neurons, 64 training vectors: 0.1943890449087539

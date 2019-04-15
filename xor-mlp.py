@@ -24,9 +24,8 @@ base_t_data = [0, 1, 1, 0]
 
 
 def generate_training_data(n):
-    print "Generatic training data..."
+    print "Generating training data..."
     noise = pd.DataFrame(np.random.normal(loc=0.0, scale=0.5, size=(n * 4, 2)))
-    # print noise
     X = pd.DataFrame(base_X_data * n) + noise
     X["offset"] = [-1] * n * 4
 
@@ -39,8 +38,8 @@ def generate_training_data(n):
 
 
 def display_accuracy_image(model, hidden_neurons, training_vectors):
-    title = "{} hidden neurons, {} training vectors".format(hidden_neurons, training_vectors)
-    filename = "images/image_three_{}neurons_{}vectors.png".format(hidden_neurons, training_vectors)
+    title = "{} hidden neurons, {} training vectors using hyperbolic tangent".format(hidden_neurons, training_vectors)
+    filename = "images/image_tanh_{}neurons_{}vectors.png".format(hidden_neurons, training_vectors)
 
     splits = 30
 
@@ -95,7 +94,7 @@ def display_accuracy_epoch_graph(history, hidden_neurons, training_vectors):
 def build_model(hidden_neurons):
     model = Sequential()
     model.add(Dense(hidden_neurons, input_dim=3))
-    model.add(Activation("sigmoid"))
+    model.add(Activation("tanh"))
     model.add(Dense(1))
     model.add(Activation("sigmoid"))
 
@@ -119,8 +118,8 @@ def run():
     if write_predictions:
         f = open("prediction_accuracy.txt", "w")
     
-    for data_size in [16, 32, 64]:
-        for hidden_neurons in [2, 4, 8]:
+    for data_size in [64]:
+        for hidden_neurons in [4]:
             title = "{} hidden neurons, {} training vectors".format(hidden_neurons, data_size)
             print title
 
@@ -131,11 +130,11 @@ def run():
             t = X["t"]
             del X["t"]
 
-            history = model.fit(X, t, epochs=1000, batch_size=1)
+            history = model.fit(X, t, epochs=500, batch_size=1)
 
             # display_accuracy_image(model, title)
             display_accuracy_image(model, hidden_neurons, data_size)
-            display_accuracy_epoch_graph(history, hidden_neurons, data_size)
+            # display_accuracy_epoch_graph(history, hidden_neurons, data_size)
 
             if write_predictions:
 

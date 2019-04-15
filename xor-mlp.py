@@ -42,7 +42,7 @@ def generate_training_data(n):
 
 def display_accuracy_image(model, hidden_neurons, training_vectors):
     title = "{} hidden neurons, {} training vectors".format(hidden_neurons, training_vectors)
-    filename = "images/image_four_{}neurons_{}vectors.png".format(hidden_neurons, training_vectors)
+    filename = "images/image_{}neurons_{}vectors.png".format(hidden_neurons, training_vectors)
 
     splits = 30
 

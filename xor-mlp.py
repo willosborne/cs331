@@ -33,6 +33,8 @@ def generate_training_data(n):
     t = pd.DataFrame(base_t_data * n)
     X["t"] = t
 
+    X.columns = ["x", "y", "offset", "t"]
+
     # print X
 
     return X
@@ -40,7 +42,7 @@ def generate_training_data(n):
 
 def display_accuracy_image(model, hidden_neurons, training_vectors):
     title = "{} hidden neurons, {} training vectors".format(hidden_neurons, training_vectors)
-    filename = "images/image_three_{}neurons_{}vectors.png".format(hidden_neurons, training_vectors)
+    filename = "images/image_four_{}neurons_{}vectors.png".format(hidden_neurons, training_vectors)
 
     splits = 30
 
@@ -54,7 +56,7 @@ def display_accuracy_image(model, hidden_neurons, training_vectors):
         df = pd.concat([df, df2])
     df["offset"] = -1
 
-    output = model.predict(df, batch_size=1)
+    output = model.predict(np.array(df), batch_size=1)
     df["out"] = output
 
     del df["offset"]
@@ -125,12 +127,20 @@ def run():
             print title
 
             model = build_model(hidden_neurons)
-            X = pd.read_csv("data_" + str(data_size) + "_good.csv")
+            X = generate_training_data(data_size)
+            # X = pd.read_csv("data_" + str(data_size) + "_good.csv")
+            # X = X.reindex(columns=['x', 'y', 'offset', 't'])
+            # X.fillna(0, inplace=True)
+
+            print X
 
             t = X["t"]
             del X["t"]
+            print t
+            # t.columns = t.columns.to_series().apply(lambda x: x.strip())
+		
 
-            history = model.fit(X, t, epochs=1000, batch_size=1)
+            history = model.fit(np.array(X), np.array(t), nb_epoch=10, batch_size=1)
 
             # display_accuracy_image(model, title)
             display_accuracy_image(model, hidden_neurons, data_size)
@@ -138,7 +148,7 @@ def run():
 
             if write_predictions:
 
-                predictions = model.predict(test_patterns, batch_size=1)
+                predictions = model.predict(np.array(test_patterns), batch_size=1)
 
                 error = mean_squared_error(ideal_predictions, predictions)
                 print "Error: " + str(error)

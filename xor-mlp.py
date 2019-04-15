@@ -40,7 +40,7 @@ def generate_training_data(n):
 
 def display_accuracy_image(model, hidden_neurons, training_vectors):
     title = "{} hidden neurons, {} training vectors".format(hidden_neurons, training_vectors)
-    filename = "images/image_two_{}neurons_{}vectors.png".format(hidden_neurons, training_vectors)
+    filename = "images/image_three_{}neurons_{}vectors.png".format(hidden_neurons, training_vectors)
 
     splits = 30
 
@@ -60,7 +60,7 @@ def display_accuracy_image(model, hidden_neurons, training_vectors):
     del df["offset"]
 
     # print df
-
+   
     del df["x"], df["y"]
 
     plt.figure()

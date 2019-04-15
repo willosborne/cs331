@@ -25,7 +25,7 @@ base_t_data = [0, 1, 1, 0]
 
 def generate_training_data(n):
     print "Generatic training data..."
-    noise = pd.DataFrame(np.random.normal(loc=0.0, scale=0.5, size=(n * 4, 2)))
+    noise = pd.DataFrame(np.random.normal(loc=0.0, scale=0.1, size=(n * 4, 2)))
     # print noise
     X = pd.DataFrame(base_X_data * n) + noise
     X["offset"] = [-1] * n * 4
@@ -125,7 +125,8 @@ def run():
             print title
 
             model = build_model(hidden_neurons)
-            X = pd.read_csv("data_" + str(data_size) + "_good.csv")
+            # X = pd.read_csv("data_" + str(data_size) + "_good.csv")
+            X = generate_training_data(data_size)
 
             t = X["t"]
             del X["t"]
@@ -134,7 +135,7 @@ def run():
 
             # display_accuracy_image(model, title)
             display_accuracy_image(model, hidden_neurons, data_size)
-            # display_accuracy_epoch_graph(history, hidden_neurons, data_size)
+            display_accuracy_epoch_graph(history, hidden_neurons, data_size)
 
             if write_predictions:
 

@@ -144,7 +144,7 @@ def run():
 
             # display_accuracy_image(model, title)
             display_accuracy_image(model, hidden_neurons, data_size)
-            # display_accuracy_epoch_graph(history, hidden_neurons, data_size)
+            display_accuracy_epoch_graph(history, hidden_neurons, data_size)
 
             if write_predictions:
 
